@@ -41,7 +41,7 @@ function cellStyle(
   position: Position,
   lastMoveWasUndo: boolean,
 ): CSSProperties {
-  let animation: string | undefined = undefined;
+  let animation: string | undefined;
   if (!lastMoveWasUndo && cell?.state === "merged") {
     const mergeDuration = Math.max(
       ...cell.prevPositions.map((sourcePosition) =>
@@ -65,8 +65,8 @@ function cellStyle(
   return _style;
 }
 
-function cellClass(cell: Cell) {
-  return cell === null ? "empty" : `cell-${cell.value}`;
+function cellClass(cell: NonNullable<Cell>) {
+  return `cell-${cell.value}`;
 }
 
 function GameCell({ cell, position, lastMoveWasUndo } :
@@ -103,7 +103,7 @@ function GameCell({ cell, position, lastMoveWasUndo } :
   return (
     <div
       ref={cellRef}
-      className={`game-cell ${cell === null ? "game-cell--empty" : cellClass(cell)}`}
+      className={`game-cell ${cell ? cellClass(cell) : "game-cell--empty"}`}
       style={cellStyle(cell, position, lastMoveWasUndo)}
     >
       {cell?.value}

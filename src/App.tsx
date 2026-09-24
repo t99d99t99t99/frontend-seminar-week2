@@ -199,7 +199,7 @@ function App() {
   return (
     <main>
       <h1>2048 Game</h1>
-      <p id="gameOverMessage">
+      <p>
         {gameStatus === "GAMEOVER" && "GAME OVER"}
         {gameStatus === "CLEAR" && "CLEAR!"}
         {gameStatus === "PLAYING" && "PRESS ARROW BUTTONS TO MOVE!"}
@@ -207,8 +207,8 @@ function App() {
       <div id="currentScore">Score: {moves[moves.length - 1].score}</div>
       <div id="hiScore">HiScore: {highScore}</div>
       <GameMap moves={moves} lastMoveWasUndo={lastMoveWasUndo} />
-      <button id="undoButton" onClick={() => handleUndo()} disabled={gameStatus !== "PLAYING"}>undo</button>
-      <button id="resetButton" onClick={() => handleReset()}>Reset</button>
+      <button id="undoButton" onClick={handleUndo} disabled={gameStatus !== "PLAYING"}>undo</button>
+      <button id="resetButton" onClick={handleReset}>Reset</button>
     </main>
   );
 }
